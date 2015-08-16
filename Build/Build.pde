@@ -1,24 +1,19 @@
-# Processing-Boilerplate
-
-Neil Panchal's personal Processing IDE template. This template utilizes the Chroma & Luma libraries for color generation found here:
-
-https://github.com/neilpanchal/Chroma
-https://github.com/neilpanchal/Luma
-
-```processing
 // Author: Neil Panchal
 // License: The MIT License
 // Copyright (c) 2015 Neil Panchal, http://neil.engineer
 // ----------------------------------------------------------------------------
 
-// Import color libraries
+// Import libraries
 import com.chroma.*;
 import com.luma.*;
+import java.util.UUID;
 
 // Project details
-String title = "Boiler Plate";
+String project_name = "Boiler Plate";
+String project_color = "Color";
+String folder_name = "Series 1";
+String file_title = "boiler_plate";
 
-int series = 1;
 int frame = 1;
 
 // Canvas
@@ -52,7 +47,8 @@ void setup() {
 }
 
 void draw() {
-
+    delay(1000);
+    background(getRandomColor().get());
 }
 
 
@@ -65,10 +61,9 @@ void mousePressed() {
 void keyReleased() {
     // Save a screenshot in PNG format
     if (key == 's' || key == 'S') {
-        saveFrame("../export/Series " +
-                    series + "/" + title + "_" + series + "_" +
-                    frame + ".png");
-        frame++;
+        saveFrame("../Export/" + project_name + "/" + project_color + "/" + folder_name + "/"
+                  + file_title + "_" + frame + "_" + UUID.randomUUID().toString().substring(0, 8) +  ".png");
+                    frame++;
     }
 }
 
@@ -77,4 +72,7 @@ Chroma getRandomColor() {
     return (bgWhite) ? new Chroma(255) : palette[(int)random(0, palette.length)];
 }
 
-```
+void delay(int delay) {
+    int time = millis();
+    while (millis() - time <= delay);
+}
